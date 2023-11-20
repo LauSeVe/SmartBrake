@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "SmartBrake",
+    "slug": "SmartBrake",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/SmartBrakeLogo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/SmartBrakeLogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/SmartBrakeLogo.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/SmartBrakeLogo.png"
+    }
+  }
+}
