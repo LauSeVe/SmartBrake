@@ -1,12 +1,14 @@
 import React, { useState } from "react"; 
-import { View, Text, 
-		TextInput, TouchableOpacity, 
+import { View, Text, TouchableOpacity, 
 		StyleSheet, Image, ImageBackground} from "react-native"; 
+import packets from "./packages.json"
 
 const App = () => { 
 	const [counter, setCounter] = useState(0); 
-  const batterylvl = 100;
   var batteryimage = <ImageBackground style={styles.battery} source={require("./assets/battery/Bat4.png")}></ImageBackground>;	
+  const [packet, setPacket] = useState([packets]);
+  const idDevice = packet.idDevice
+  const batterylvl = packet.battery
 
 	const buttonPlus = () => { 
     if (counter != 20){
