@@ -5,7 +5,7 @@ import binascii
 def pcap_to_json(pcap_file, output_json_file):
     packets = scapy.rdpcap(pcap_file)
 
-    json_data = []
+
     for packet in packets:
         payload = binascii.hexlify(packet[scapy.Raw].load).decode('utf-8')
     payload_hex = payload[4:8]
@@ -15,25 +15,25 @@ def pcap_to_json(pcap_file, output_json_file):
     payload_binary_full = (16-len(payload_binary)) * "0" + payload_binary
 
 
-    idDevice_binary = payload_binary_full[:9] 
+    idMobile_binary = payload_binary_full[:9] 
     battery_binary = payload_binary_full[9:16]
 
-    idDevice_decimal = int(idDevice_binary, 2)
+    idMobile_decimal = int(idMobile_binary, 2)
     battery_decimal = int(battery_binary, 2)
 
 
     packet_data = {
-        "idDevice": idDevice_decimal,
+        "idMobile": idMobile_decimal,
         "battery": battery_decimal
     }
 
-    json_data.append(packet_data)
 
-    with open(output_json_file, 'w') as json_file:
-        json.dump(json_data, json_file, indent=4)
+    with open(output_json_file, 'w') as file:
+        json.dump(packet_data, file)
 
 if __name__ == "__main__":
-    pcap_file = "dev2mob1.pcap"  # Replace with the path to your PCAP file
+    pcap_file = "dev2mob2.pcap"  # Replace with the path to your PCAP file
     output_json_file = "packets.json"  # Replace with the desired output JSON file
 
     pcap_to_json(pcap_file, output_json_file)
+

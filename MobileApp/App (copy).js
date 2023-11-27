@@ -4,15 +4,13 @@ import packets from './packets.json';
 
 
 const App = () => { 
-	const [counter, setCounter] = useState(10); 
+	const [counter, setCounter] = useState(0); 
   var batteryimage = <ImageBackground style={styles.battery} source={require("./assets/battery/Bat4.png")}></ImageBackground>;	
   const [packet, setPacket] = useState({
-    "idMobile": 0,
+    "idDevice": 0,
     "battery": 0
-  });
-  const batterylvl = packet.battery;
-  const idMobile = packet.idMobile; 
-  const [output, setOutput] = useState(outputJson);
+});
+  const batterylvl = 0;
   
   useEffect(() => {
     setPacket(packets);
@@ -22,24 +20,15 @@ const App = () => {
     if (counter != 20){
 		setCounter(counter + 1); 
     console.log("Max. speed is: " + (counter + 1));} 
-    setOutput({ ...output, velMax: {counter} });
 	}; 
 
 	const buttonMinus = () => { 
     if (counter != 0){
 		setCounter(counter - 1);
     console.log("Max. speed is: " + (counter - 1));} 
-    setOutput({ ...output, velMax: {counter} });
 	};
   const buttonBrake = () => {
     console.log('You have been clicked the Brake button!');
-    setOutput({ ...output, command: 11 });
-  };
-
-  const outputJson = {
-    idMobile: {idMobile},
-    command: 0,
-    velMax: {counter},
   };
 
   if(batterylvl == 100){
@@ -74,6 +63,7 @@ const App = () => {
 
 	return ( 
 		<View style={styles.container}>
+      <Text>Battery:{packet.battery}, idDevice: {packet.idDevice}</Text>
       <Image style={styles.row} source={require("./assets/SmartBrakeName.png")}/>
       <View style={styles.row}>
         {batteryimage}
