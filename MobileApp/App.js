@@ -10,9 +10,8 @@ const App = () => {
     "idMobile": 0,
     "battery": 0
   });
-  const batterylvl = packet.battery;
+  var batterylvl = packet.battery;
   const idMobile = packet.idMobile; 
-  const [output, setOutput] = useState(outputJson);
   
   useEffect(() => {
     setPacket(packets);
@@ -22,26 +21,19 @@ const App = () => {
     if (counter != 20){
 		setCounter(counter + 1); 
     console.log("Max. speed is: " + (counter + 1));} 
-    setOutput({ ...output, velMax: {counter} });
 	}; 
 
 	const buttonMinus = () => { 
     if (counter != 0){
-		setCounter(counter - 1);
-    console.log("Max. speed is: " + (counter - 1));} 
-    setOutput({ ...output, velMax: {counter} });
+		  setCounter(counter - 1);
+      console.log("Max. speed is: " + (counter - 1)); 
+      }
 	};
   const buttonBrake = () => {
     console.log('You have been clicked the Brake button!');
-    setOutput({ ...output, command: 11 });
+    setPacket(prevPacket => ({ ...prevPacket, battery: 100 }));
   };
 
-  const outputJson = {
-    idMobile: {idMobile},
-    command: 0,
-    velMax: {counter},
-  };
-  const jsonString = JSON.stringify(outputJson);
 
   if(batterylvl == 100){
     batteryimage = (<ImageBackground style={styles.battery} source={require("./assets/battery/FullBat.png")}> 
