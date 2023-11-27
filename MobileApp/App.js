@@ -41,6 +41,7 @@ const App = () => {
     command: 0,
     velMax: {counter},
   };
+  const jsonString = JSON.stringify(outputJson);
 
   if(batterylvl == 100){
     batteryimage = (<ImageBackground style={styles.battery} source={require("./assets/battery/FullBat.png")}> 
