@@ -3,37 +3,61 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground} from 
 import packets from './packets.json';
 
 
-const App = () => { 
+const App = () => {
 	const [counter, setCounter] = useState(10); 
   var batteryimage = <ImageBackground style={styles.battery} source={require("./assets/battery/Bat4.png")}></ImageBackground>;	
   const [packet, setPacket] = useState({
-    "idMobile": 0,
-    "battery": 0
+    "idMobile": packets.idMobile,
+    "battery": packets.battery
   });
   var batterylvl = packet.battery;
-  const idMobile = packet.idMobile; 
-  
+  var mobile = packet.idMobile;
+
   useEffect(() => {
     setPacket(packets);
   }, []);
 
+  var temp = counter;
+  const [outPut, setOutPut] = useState({
+    "idMobile": mobile,
+    "command": 0,
+    "velMax": temp
+  });
+  
+
 	const buttonPlus = () => { 
     if (counter != 20){
-		setCounter(counter + 1); 
-    console.log("Max. speed is: " + (counter + 1));} 
+      temp = counter + 1;
+      setCounter(temp); 
+      console.log("Max. speed is: " + (temp));
+      setOutPut(prevOutPut => ({ ...prevOutPut, idMobile: mobile, velMax: temp}));
+    }
 	}; 
 
 	const buttonMinus = () => { 
     if (counter != 0){
-		  setCounter(counter - 1);
-      console.log("Max. speed is: " + (counter - 1)); 
+      temp = counter - 1;
+      setCounter(temp); 
+      console.log("Max. speed is: " + (temp));
+      setOutPut(prevOutPut => ({ ...prevOutPut, idMobile: mobile, velMax: temp}));
       }
 	};
-  const buttonBrake = () => {
-    console.log('You have been clicked the Brake button!');
-    setPacket(prevPacket => ({ ...prevPacket, battery: 100 }));
+
+  const buttonBrake = () => { 
+    console.log('You have been clicked the Brake button!' );
+    setOutPut(prevOutPut => ({ ...prevOutPut, idMobile: mobile, command:3}));
   };
 
+  if (__DEV__) {
+    console.log(outPut);
+  };
+
+  useEffect(() => {
+    // Log a message every second
+    const intervalId = setInterval(() => {
+      setOutPut(prevOutPut => ({ ...prevOutPut, command: 0}));
+    }, 1000);
+  }, []);
 
   if(batterylvl == 100){
     batteryimage = (<ImageBackground style={styles.battery} source={require("./assets/battery/FullBat.png")}> 
@@ -90,6 +114,7 @@ const App = () => {
 					<Text style={styles.velButtonLabel1}>+</Text> 
 				</TouchableOpacity> 
 		  </View> 
+      <Text >{mobile}</Text> 
     </View>
 	); 
 }; 
@@ -178,6 +203,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     backgroundColor:"white",
     paddingHorizontal: 30,
+  },
+  novisible:{
+    opacity: 0,
   },
 });
 

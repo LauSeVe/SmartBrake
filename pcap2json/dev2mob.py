@@ -32,8 +32,8 @@ def pcap_to_json(pcap_file, output_json_file):
         json.dump(packet_data, file)
 
 if __name__ == "__main__":
-    pcap_file = "dev2mob2.pcap"  # Replace with the path to your PCAP file
-    output_json_file = "packets.json"  # Replace with the desired output JSON file
+    pcap_file = "../BLE/dev2mob/dev2mob5.pcap"  # Replace with the path to your PCAP file
+    output_json_file = "../MobileApp/packets.json"  # Replace with the desired output JSON file
 
     pcap_to_json(pcap_file, output_json_file)
 
