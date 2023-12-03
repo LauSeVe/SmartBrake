@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; 
 import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground} from "react-native"; 
-import packets from './packets.json';
+import packets from "./packets.json";
 
 
 const App = () => {
@@ -114,7 +114,6 @@ const App = () => {
 					<Text style={styles.velButtonLabel1}>+</Text> 
 				</TouchableOpacity> 
 		  </View> 
-      <Text >{mobile}</Text> 
     </View>
 	); 
 }; 
